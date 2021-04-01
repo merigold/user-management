@@ -168,11 +168,15 @@ class Route extends AbstractItem
 			// If some controller fully allowed (wildcard)
 			if (substr($allowedRoute, -1) == '*')
 			{
+			 
 				$routeArray = explode('/', $route);
 				array_splice($routeArray, -1);
-
+				
 				$allowedRouteArray = explode('/', $allowedRoute);
-				array_splice($allowedRouteArray, -1);
+				$offset = (count($allowedRouteArray) - count($routeArray) +1)*-1;
+				
+				array_splice($allowedRouteArray, $offset);
+    
 
 				if (array_diff($routeArray, $allowedRouteArray) === array())
 					return true;
